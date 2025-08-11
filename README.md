@@ -1,7 +1,4 @@
 ---
-
-Visit my portfolio using - https://sichathurangaweb.vercel.app/
-
 name: HTML Starter
 slug: html-starter-with-analytics
 description: HTML5 template with analytics and advanced routing configuration.
