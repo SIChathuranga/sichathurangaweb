@@ -52,6 +52,19 @@
             --border-color: #34495e;
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             --contact-bg: #1a1a1a; /* Fixed contact background color for dark mode */
+            --small-text-color: #fff;
+[data-theme="dark"] .project-tag,
+[data-theme="dark"] .project-info p {
+    color: #fff !important;
+}
+[data-theme="dark"] .education-item span,
+[data-theme="dark"] .experience-item span,
+[data-theme="dark"] .contact-item p,
+[data-theme="dark"] .contact-item a,
+[data-theme="dark"] .skill-badge,
+[data-theme="dark"] .tech-item span {
+    color: var(--small-text-color) !important;
+}
         }
         
         /* Global Styles */
@@ -621,13 +634,24 @@
         .education-item h4, .experience-item h4 {
             margin-bottom: 5px;
             font-size: 1.1rem;
+            color: #222 !important;
+            transition: color var(--transition-speed) ease;
         }
         
         .education-item span, .experience-item span {
             font-size: 0.9rem;
-            color: #777;
+            color: #222 !important;
             transition: color var(--transition-speed) ease;
         }
+ [data-theme="dark"] .education-item h4,
+ [data-theme="dark"] .experience-item h4 {
+     color: #f6efef !important;
+ }
+
+ [data-theme="dark"] .education-item span,
+ [data-theme="dark"] .experience-item span {
+     color: #f6efef !important;
+ }
         
         /* Skills Section */
         .skills {
@@ -961,9 +985,13 @@
         }
         
         .project-info p {
-            margin-bottom: 15px;
-            color: #666;
-            transition: color var(--transition-speed) ease;
+                margin-bottom: 15px;
+                color: #222 !important;
+                transition: color var(--transition-speed) ease;
+            }
+
+            [data-theme="dark"] .project-info p {
+                color: #fff !important;
         }
         
         .project-tags {
@@ -1122,12 +1150,13 @@
         
         /* Contact Form Styles */
         .contact-form {
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            backdrop-filter: blur(10px);
             flex: 1;
             min-width: 300px;
             background-color: rgba(255, 255, 255, 0.1);
             padding: 30px;
             border-radius: 10px;
-            backdrop-filter: blur(10px);
             box-shadow: var(--shadow);
             transition: all var(--transition-speed) ease;
             opacity: 0;
@@ -1456,8 +1485,8 @@
             </nav>
             <div class="theme-toggle">
                 <span>Light</span>
-                <label class="switch">
-                    <input type="checkbox" id="theme-toggle">
+                <label class="switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" title="Toggle dark/light theme">
                     <span class="slider"></span>
                 </label>
                 <span>Dark</span>
@@ -1714,7 +1743,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/65529a117777795.607c881b5bc1e.jpg" alt="Skill Sharing Web Application">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1725,7 +1754,7 @@
                             <span class="project-tag">Spring Boot</span>
                             <span class="project-tag">Team Lead</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/PAF-Project-SkillSphere.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/PAF-Project-SkillSphere.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1734,7 +1763,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://mir-s3-cdn-cf.behance.net/projects/max_808/dafaa5177795141.Y3JvcCw4MTYsNjM4LDAsMA.jpg" alt="Hotel Management System">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1745,7 +1774,7 @@
                             <span class="project-tag">Tailwind CSS</span>
                             <span class="project-tag">MongoDB</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/Hotel-Management-System.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/Hotel-Management-System.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1754,7 +1783,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/0df525190656787.65be5d6193822.jpg" alt="Student Management System">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1765,7 +1794,7 @@
                             <span class="project-tag">MySQL</span>
                             <span class="project-tag">HTML/CSS/JS</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/Gym-Management-System.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/Gym-Management-System.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1774,7 +1803,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/7472bb53922771.Y3JvcCwxNzA0LDEzMzMsMCwxMzY3.png" alt="Bike Spare Parts Management">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1785,7 +1814,7 @@
                             <span class="project-tag">MySQL</span>
                             <span class="project-tag">Inventory System</span>
                         </div>
-                        <a href="#" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1794,7 +1823,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://img.freepik.com/premium-vector/online-shopping-landing-page_1366-436.jpg" alt="Online Shopping System">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1805,7 +1834,7 @@
                             <span class="project-tag">E-commerce</span>
                             <span class="project-tag">Authentication</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/ITPM_SHOPPY.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/ITPM_SHOPPY.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1814,7 +1843,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://mir-s3-cdn-cf.behance.net/projects/404/9f7525199234371.Y3JvcCwxMDgwLDg0NCwwLDI1MQ.jpg" alt="Weather Forecast Application">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1825,7 +1854,7 @@
                             <span class="project-tag">HTML/CSS/JS</span>
                             <span class="project-tag">Blog</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/Sri_Lankan_Cuisine.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/Sri_Lankan_Cuisine.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1834,7 +1863,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://img.freepik.com/premium-vector/ask-doctor-online-illustration_106954-1715.jpg" alt="Task Management Application">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1845,7 +1874,7 @@
                             <span class="project-tag">MySQL</span>
                             <span class="project-tag">Health</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/Doctor-Channeling-System.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/Doctor-Channeling-System.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1854,7 +1883,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://doodlelearning.com/wp-content/uploads/2023/08/math-games-for-kids-1.png" alt="Library Management System">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1865,7 +1894,7 @@
                             <span class="project-tag">Android Studio</span>
                             <span class="project-tag">Maths</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/MobileGame.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/MobileGame.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1874,7 +1903,7 @@
                         <!-- Replace with your Google Drive image URL -->
                         <img src="https://i.pinimg.com/originals/1f/5b/f1/1f5bf1d1bd692221b9995d91c433ecd4.jpg" alt="Portfolio Website">
                         <div class="project-overlay">
-                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="#" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" title="External link"></i></a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -1885,7 +1914,7 @@
                             <span class="project-tag">JavaScript</span>
                             <span class="project-tag">Responsive Design</span>
                         </div>
-                        <a href="https://github.com/SIChathuranga/sichathurangaweb.git" class="project-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/SIChathuranga/sichathurangaweb.git" class="project-link" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 
@@ -1923,10 +1952,10 @@
                     </div>
                     
                     <div class="social-links">
-                        <a href="https://linkedin.com/in/sanindu-imasha-chathuranga-1a8301237" class="social-link" target="_blank">
+                        <a href="https://linkedin.com/in/sanindu-imasha-chathuranga-1a8301237" class="social-link" target="_blank" rel="noopener">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="https://github.com/SIChathuranga" class="social-link" target="_blank">
+                        <a href="https://github.com/SIChathuranga" class="social-link" target="_blank" rel="noopener">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
@@ -1950,6 +1979,28 @@
                         <button type="submit" class="btn">Send Message</button>
                     </form>
                 </div>
+                <!-- Contact Info Items ...existing code... -->
+                <!-- Contact Form -->
+                <form class="contact-form" id="contactForm">
+                    <div class="form-message" id="form-message"></div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
@@ -1963,8 +2014,8 @@
     
     <!-- CV Button -->
     <div class="cv-btn" id="cvBtn">
-        <i class="fas fa-file-download"></i>
-        <div class="cv-tooltip">Download CV</div>
+    <i class="fas fa-file-download" title="Download CV"></i>
+    <div class="cv-tooltip">Download CV</div>
     </div>
     
     <script>
