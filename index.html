@@ -1025,6 +1025,253 @@
             transform: translateX(5px);
         }
         
+        /* Certificates Section */
+        .certificates {
+            background-color: var(--bg-color);
+            transition: background-color var(--transition-speed) ease;
+        }
+        
+        .certificates .section-intro {
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .certificate-carousel {
+            position: relative;
+            padding-inline: 2.5rem;
+        }
+
+        .certificate-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(260px, 1fr);
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-block: 1rem;
+            scrollbar-width: none;
+            scroll-padding-inline: 2rem;
+            width: 100%;
+        }
+
+        .certificate-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .certificate-card {
+            scroll-snap-align: center;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            opacity: 0;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+        }
+
+        .certificate-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.12);
+        }
+
+        .certificate-card.visible.active {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(52, 152, 219, 0.35);
+            box-shadow: 0 20px 42px rgba(0, 0, 0, 0.2);
+        }
+
+        .certificate-card.visible.active:hover {
+            transform: translateY(-16px) scale(1.04);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+        }
+
+        .certificate-card figure {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .certificate-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            cursor: zoom-in;
+        }
+
+        .certificate-card figcaption {
+            padding: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .certificate-card figcaption span {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 0.25rem;
+        }
+
+        .carousel-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: #fff;
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+        }
+
+        .carousel-btn i {
+            pointer-events: none;
+        }
+
+        .carousel-btn:hover {
+            transform: scale(1.08);
+            opacity: 0.95;
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .carousel-btn[data-cert-prev] {
+            left: 0;
+        }
+
+        .carousel-btn[data-cert-next] {
+            right: 0;
+        }
+
+        .certificate-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 20px;
+        }
+
+        .certificate-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(44, 62, 80, 0.25);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .certificate-dot.active {
+            transform: scale(1.2);
+            background-color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] .certificate-dot {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .certificate-card:focus-visible {
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 4px;
+        }
+
+        .certificate-card.active figcaption {
+            color: var(--secondary-color);
+        }
+
+        .certificate-card.active figcaption span {
+            opacity: 0.9;
+        }
+
+        .certificate-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 2000;
+        }
+
+        .certificate-modal.open {
+            display: flex;
+        }
+
+        .certificate-modal__content {
+            position: relative;
+            max-width: min(900px, 90vw);
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .certificate-modal__content img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: contain;
+            max-height: min(70vh, 600px);
+        }
+
+        .certificate-modal__caption h3 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .certificate-modal__caption p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.05);
+            background: var(--secondary-color);
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
         /* Contact Section */
         .contact {
             background-color: var(--contact-bg);
@@ -1343,6 +1590,10 @@
                 width: 40px;
                 height: 40px;
             }
+
+            .certificate-track {
+                grid-auto-columns: minmax(320px, 1fr);
+            }
         }
         
         @media (max-width: 768px) {
@@ -1414,6 +1665,20 @@
             .tech-item span {
                 font-size: 0.8rem;
             }
+
+            .certificate-carousel {
+                padding-inline: 1.75rem;
+            }
+
+            .certificate-track {
+                grid-auto-columns: minmax(75%, 1fr);
+                scroll-padding-inline: 1.5rem;
+            }
+
+            .carousel-btn {
+                width: 42px;
+                height: 42px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1459,6 +1724,16 @@
             .tech-item span {
                 font-size: 0.7rem;
             }
+
+            .certificate-track {
+                grid-auto-columns: minmax(85%, 1fr);
+                scroll-padding-inline: 1.25rem;
+            }
+
+            .carousel-btn {
+                width: 38px;
+                height: 38px;
+            }
         }
     </style>
 </head>
@@ -1480,6 +1755,7 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#technologies">Technologies</a></li>
                     <li><a href="#projects">Projects</a></li>
+                    <li><a href="#certificates">Certificates</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -1923,6 +2199,162 @@
         </div>
     </section>
     
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates">
+        <div class="container">
+            <h2>Certificates</h2>
+            <p class="section-intro">A curated selection of the credentials and micro-credentials I have earned across cloud, security, DevOps, and software engineering disciplines.</p>
+            <div class="certificate-carousel">
+                <button class="carousel-btn" data-cert-prev aria-label="View previous certificate">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="certificate-track" role="list">
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1hyUd39Elr9crH_fzFZE3CwOA4EtayBR4" data-drive-id="1hyUd39Elr9crH_fzFZE3CwOA4EtayBR4" alt="Introduction to Azure virtual machines certificate" loading="lazy">
+                            <figcaption>Introduction to Azure virtual machines<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1AgAXIIqp6tm_MjaLcpqFGnuWmg7U2ten" data-drive-id="1AgAXIIqp6tm_MjaLcpqFGnuWmg7U2ten" alt="Explore relational database services in Azure certificate" loading="lazy">
+                            <figcaption>Explore relational database services in Azure<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1hCqPVdzPb2Oh9jq8Hagb9KKQAGvY3Gd5" data-drive-id="1hCqPVdzPb2Oh9jq8Hagb9KKQAGvY3Gd5" alt="Describe Azure identity, access, and security certificate" loading="lazy">
+                            <figcaption>Describe Azure identity, access, and security<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1JDlj1emZFtbqnM_PIqUs5BXaiEmeV3k6" data-drive-id="1JDlj1emZFtbqnM_PIqUs5BXaiEmeV3k6" alt="Configure virtual networks certificate" loading="lazy">
+                            <figcaption>Configure virtual networks<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=12PP6HVWDqqfs_bgb-WKVMqCZTPa58RG-" data-drive-id="12PP6HVWDqqfs_bgb-WKVMqCZTPa58RG-" alt="Configure virtual machine availability certificate" loading="lazy">
+                            <figcaption>Configure virtual machine availability<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1M073YNquKnPbHuyPxhLrT7So30-HbefD" data-drive-id="1M073YNquKnPbHuyPxhLrT7So30-HbefD" alt="Configure Azure Blob Storage certificate" loading="lazy">
+                            <figcaption>Configure Azure Blob Storage<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=11i53rprUWGkWs3pSAYToZpUrKnirMLrc" data-drive-id="11i53rprUWGkWs3pSAYToZpUrKnirMLrc" alt="Add and size disks in Azure virtual machines certificate" loading="lazy">
+                            <figcaption>Add and size disks in Azure virtual machines<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1wozsl54Gx36bZfwwkwpAM7_e3vtU2kYg" data-drive-id="1wozsl54Gx36bZfwwkwpAM7_e3vtU2kYg" alt="Improve application scalability and resiliency by using Azure Load Balancer certificate" loading="lazy">
+                            <figcaption>Improve application scalability and resiliency by using Azure Load Balancer<span>Azure Cloud Service</span></figcaption>
+                        </figure>
+                    </article>
+
+
+
+                    
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1gtyXyT00WYll82cwf60uZ1LIbsQzJXrX" data-drive-id="1gtyXyT00WYll82cwf60uZ1LIbsQzJXrX" alt="Introduction to Amazon Simple Storage Service (S3) certificate" loading="lazy">
+                            <figcaption>Introduction to Amazon Simple Storage Service (S3)<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1dCVWU6GGVrWmHI2_Co0VQRGaH8SKhuu6" data-drive-id="1dCVWU6GGVrWmHI2_Co0VQRGaH8SKhuu6" alt="AWS SimuLearn: Networking certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn: Networking<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1qMW1VyEzPcevHf-3iirl7N82JYBHf6dc" data-drive-id="1qMW1VyEzPcevHf-3iirl7N82JYBHf6dc" alt="AWS SimuLearn: Highly Available Web Applications certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn: Highly Available Web Applications<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1z3PuBnE-gxIe4E5dMRAuzeC2TtC5DEci" data-drive-id="1z3PuBnE-gxIe4E5dMRAuzeC2TtC5DEci" alt="AWS SimuLearn:File Systems in the Cloud certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn:File Systems in the Cloud<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=151BJL4DJkTILlB7jXKw6FWuTvqrNcpsH" data-drive-id="151BJL4DJkTILlB7jXKw6FWuTvqrNcpsH" alt="AWS SimuLearn: Databases in Practice certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn: Databases in Practice &amp; Switching<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1wnz6MOP5uX7d092GaCGvVOlwNFKepqzU" data-drive-id="1wnz6MOP5uX7d092GaCGvVOlwNFKepqzU" alt="AWS SimuLearn: Core Security Concepts certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn: Core Security Concepts<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1Hl3Znrzh0BMTpo4A42faNZj8qBLsNJO6" data-drive-id="1Hl3Znrzh0BMTpo4A42faNZj8qBLsNJO6" alt="AWS SimuLearn: Connecting VPCS certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn: Connecting VPCS<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=17ELnwt4c0yserOE9Yo-woXLAuxVGF4DY" data-drive-id="17ELnwt4c0yserOE9Yo-woXLAuxVGF4DY" alt="AWS SimuLearn: Computing Solutions certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn: Computing Solutions<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1ipI64fekoei7mtniBACImuHtkY_fmeKR" data-drive-id="1ipI64fekoei7mtniBACImuHtkY_fmeKR" alt="AWS SimuLearn: Auto-Healing and Scaling Applications certificate" loading="lazy">
+                            <figcaption>AWS SimuLearn: Auto-Healing and Scaling Applications<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1A1_-Bce3yZuVO_99WtR3_24BKrvFAlEa" data-drive-id="1A1_-Bce3yZuVO_99WtR3_24BKrvFAlEa" alt="AWS Academy Graduate Cloud Web Application Builder - Training Badge certificate" loading="lazy">
+                            <figcaption>AWS Academy Graduate Cloud Web Application Builder - Training Badge<span>Amazon Web Services</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1UKDvpiHSxB9NRalFEMCu8lX1vvEkSr4J" data-drive-id="1UKDvpiHSxB9NRalFEMCu8lX1vvEkSr4J" alt="AI for Beginners certificate" loading="lazy">
+                            <figcaption>AI for Beginners<span>HP LIFE</span></figcaption>
+                        </figure>
+                    </article>
+                    <article class="certificate-card" role="listitem">
+                        <figure>
+                            <img src="https://drive.google.com/uc?export=view&id=1K55ht-JnIrNJMZTa9no9dZ3Quo6P2cut" data-drive-id="1K55ht-JnIrNJMZTa9no9dZ3Quo6P2cut" alt="Data Science & Analytics certificate" loading="lazy">
+                            <figcaption>Data Science & Analytics<span>HP LIFE</span></figcaption>
+                        </figure>
+                    </article>
+                </div>
+                <button class="carousel-btn" data-cert-next aria-label="View next certificate">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="certificate-dots" aria-hidden="true"></div>
+        </div>
+    </section>
+
+    <div class="certificate-modal" id="certificateModal" aria-hidden="true">
+        <div class="certificate-modal__content" role="dialog" aria-modal="true" aria-labelledby="certificateModalTitle">
+            <button type="button" class="modal-close" aria-label="Close certificate preview">
+                <i class="fas fa-times"></i>
+            </button>
+            <img src="" alt="" id="certificateModalImage">
+            <div class="certificate-modal__caption">
+                <h3 id="certificateModalTitle"></h3>
+                <p id="certificateModalIssuer"></p>
+            </div>
+        </div>
+    </div>
+    
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -2014,6 +2446,101 @@
         const formMessage = document.getElementById('form-message');
         const themeToggle = document.getElementById('theme-toggle');
         const particlesContainer = document.getElementById('particles');
+        const certificateCarousel = document.querySelector('.certificate-carousel');
+        const certificateTrack = document.querySelector('.certificate-track');
+        const certificateCards = Array.from(document.querySelectorAll('.certificate-card'));
+        const certificatePrev = document.querySelector('[data-cert-prev]');
+        const certificateNext = document.querySelector('[data-cert-next]');
+        const certificateDotsContainer = document.querySelector('.certificate-dots');
+        const certificateModal = document.getElementById('certificateModal');
+        const certificateModalImage = document.getElementById('certificateModalImage');
+        const certificateModalTitle = document.getElementById('certificateModalTitle');
+        const certificateModalIssuer = document.getElementById('certificateModalIssuer');
+        const certificateModalClose = certificateModal?.querySelector('.modal-close');
+        let allCertificateCardElements = certificateCards.slice();
+
+        certificateCards.forEach(card => {
+            card.setAttribute('tabindex', '0');
+        });
+
+        let stopCertificatesAutoPlay = null;
+        let startCertificatesAutoPlay = null;
+        let lastFocusedElement = null;
+
+        // Normalize Google Drive share links so certificate images render reliably
+        const DRIVE_THUMB_BASE = 'https://drive.google.com/thumbnail?id=';
+        const DRIVE_VIEW_BASE = 'https://drive.google.com/uc?export=view&id=';
+        const DRIVE_DOWNLOAD_BASE = 'https://drive.google.com/uc?export=download&id=';
+
+        const extractDriveId = (url) => {
+            if (!url) {
+                return '';
+            }
+            const idParamMatch = url.match(/[?&]id=([^&]+)/);
+            if (idParamMatch) {
+                return idParamMatch[1];
+            }
+            const pathMatch = url.match(/\/d\/([^/]+)/);
+            if (pathMatch) {
+                return pathMatch[1];
+            }
+            return '';
+        };
+
+        const normalizeDriveImageSource = (image) => {
+            if (!image) {
+                return;
+            }
+
+            const fileId = image.dataset.driveId || extractDriveId(image.getAttribute('src'));
+            if (!fileId) {
+                if (!image.dataset.modalSrc) {
+                    image.dataset.modalSrc = image.src;
+                }
+                return;
+            }
+
+            const requestedSize = image.dataset.driveSize || 'w1600';
+            const primarySrc = `${DRIVE_THUMB_BASE}${fileId}&sz=${requestedSize}`;
+            const fullSizeSrc = `${DRIVE_THUMB_BASE}${fileId}&sz=w2048`;
+            const fallbackSrc = `${DRIVE_VIEW_BASE}${fileId}`;
+            const downloadSrc = `${DRIVE_DOWNLOAD_BASE}${fileId}`;
+
+            if (!image.getAttribute('referrerpolicy')) {
+                image.setAttribute('referrerpolicy', 'no-referrer');
+            }
+
+            if (!image.dataset.modalSrc) {
+                image.dataset.modalSrc = fullSizeSrc;
+            }
+            if (!image.dataset.modalFallback) {
+                image.dataset.modalFallback = fallbackSrc;
+            }
+            if (!image.dataset.modalDownload) {
+                image.dataset.modalDownload = downloadSrc;
+            }
+
+            image.onerror = () => {
+                image.onerror = null;
+                image.src = fallbackSrc;
+                image.dataset.modalSrc = fallbackSrc;
+            };
+
+            if (image.src !== primarySrc) {
+                image.src = primarySrc;
+            }
+        };
+
+        const certificateImages = certificateCards
+            .map(card => card.querySelector('img'))
+            .filter(Boolean);
+
+        certificateImages.forEach(normalizeDriveImageSource);
+        certificateImages.forEach(image => {
+            if (!image.dataset.modalSrc) {
+                image.dataset.modalSrc = image.src;
+            }
+        });
         
         // Create floating particles
         function createParticles() {
@@ -2153,6 +2680,15 @@
                     card.classList.add('visible');
                 }
             });
+
+            if (certificateCards.length) {
+                certificateCards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        card.classList.add('visible');
+                    }
+                });
+            }
         };
         
         // Initial check on page load
@@ -2160,13 +2696,363 @@
         
         // Check on scroll
         window.addEventListener('scroll', revealOnScroll);
+
+        // Certificates carousel: manual controls + seamless autoplay
+        if (certificateCarousel && certificateTrack && certificateCards.length > 0) {
+            const dots = [];
+            const totalCards = certificateCards.length;
+            let certificateIndex = 0;
+            let autoPlayTimer;
+            let currentIndex;
+            let scrollTimer;
+            let isJumping = false;
+
+            certificateCards.forEach((card, index) => {
+                card.dataset.originalIndex = String(index);
+            });
+
+            const trackStyles = window.getComputedStyle(certificateTrack);
+            const gapValue = parseFloat(trackStyles.columnGap || trackStyles.gap || '0') || 0;
+            const firstCardWidth = certificateCards[0]?.offsetWidth || certificateTrack.clientWidth;
+            const effectiveCardWidth = firstCardWidth + gapValue;
+            const estimatedVisible = effectiveCardWidth ? Math.round((certificateTrack.clientWidth + gapValue) / effectiveCardWidth) : 1;
+            const visibleCount = Math.max(1, Math.min(totalCards, estimatedVisible || 1));
+
+            const prependClones = [];
+            const appendClones = [];
+
+            const cloneCard = (sourceCard, insertBeforeNode = null) => {
+                const clone = sourceCard.cloneNode(true);
+                clone.dataset.originalIndex = sourceCard.dataset.originalIndex;
+                clone.dataset.clone = 'true';
+                clone.classList.add('visible');
+                if (!clone.hasAttribute('tabindex')) {
+                    clone.setAttribute('tabindex', '0');
+                }
+                if (insertBeforeNode) {
+                    certificateTrack.insertBefore(clone, insertBeforeNode);
+                } else {
+                    certificateTrack.appendChild(clone);
+                }
+                const clonedImage = clone.querySelector('img');
+                if (clonedImage) {
+                    normalizeDriveImageSource(clonedImage);
+                    if (!clonedImage.dataset.modalSrc) {
+                        clonedImage.dataset.modalSrc = clonedImage.src;
+                    }
+                }
+                return clone;
+            };
+
+            const effectiveVisible = Math.min(visibleCount, totalCards);
+            const firstOriginal = certificateTrack.firstElementChild;
+
+            // Clone trailing cards to the front so the loop can wrap without a jump
+            for (let i = 0; i < effectiveVisible; i++) {
+                const sourceIndex = (totalCards - effectiveVisible + i) % totalCards;
+                const clone = cloneCard(certificateCards[sourceIndex], firstOriginal);
+                prependClones.push(clone);
+            }
+
+            // Clone leading cards to the end to support forward autoplay continuity
+            for (let i = 0; i < effectiveVisible; i++) {
+                const sourceIndex = i % totalCards;
+                const clone = cloneCard(certificateCards[sourceIndex]);
+                appendClones.push(clone);
+            }
+
+            let allCards = Array.from(certificateTrack.querySelectorAll('.certificate-card'));
+            allCertificateCardElements = allCards;
+
+            allCards.forEach(card => {
+                if (!card.hasAttribute('tabindex')) {
+                    card.setAttribute('tabindex', '0');
+                }
+            });
+
+            const prependCount = prependClones.length;
+            const appendCount = appendClones.length;
+            currentIndex = prependCount;
+
+            const scrollToIndex = (index, behavior = 'smooth') => {
+                const target = allCards[index];
+                if (!target) {
+                    return;
+                }
+
+                const trackWidth = certificateTrack.clientWidth;
+                const cardWidth = target.clientWidth;
+                const maxScroll = certificateTrack.scrollWidth - trackWidth;
+                let offset = target.offsetLeft - (trackWidth - cardWidth) / 2;
+                offset = Math.max(0, Math.min(offset, maxScroll));
+
+                if (typeof certificateTrack.scrollTo === 'function') {
+                    certificateTrack.scrollTo({
+                        left: offset,
+                        behavior: behavior === 'smooth' ? 'smooth' : 'auto'
+                    });
+                } else {
+                    certificateTrack.scrollLeft = offset;
+                }
+            };
+
+            const setActiveCard = (index) => {
+                const targetIndex = String(index);
+                allCards.forEach(card => {
+                    card.classList.toggle('active', card.dataset.originalIndex === targetIndex);
+                });
+            };
+
+            const updateDots = () => {
+                if (!dots.length) {
+                    return;
+                }
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === certificateIndex);
+                });
+            };
+
+            const stopAutoPlay = () => {
+                if (autoPlayTimer) {
+                    clearInterval(autoPlayTimer);
+                    autoPlayTimer = null;
+                }
+            };
+
+            const AUTO_PLAY_INTERVAL = 5000;
+
+            const moveToIndex = (index, isAuto = false, behavior = 'smooth') => {
+                currentIndex = index;
+                const targetCard = allCards[currentIndex];
+                if (!targetCard) {
+                    return;
+                }
+
+                const originalIndex = Number(targetCard.dataset.originalIndex || 0);
+                certificateIndex = ((originalIndex % totalCards) + totalCards) % totalCards;
+                setActiveCard(certificateIndex);
+                updateDots();
+                scrollToIndex(currentIndex, behavior);
+
+                if (!isAuto) {
+                    startAutoPlay();
+                }
+            };
+
+            const startAutoPlay = () => {
+                stopAutoPlay();
+                autoPlayTimer = setInterval(() => moveToIndex(currentIndex + 1, true), AUTO_PLAY_INTERVAL);
+            };
+
+            const jumpToIndex = (index) => {
+                isJumping = true;
+                scrollToIndex(index, 'auto');
+                requestAnimationFrame(() => {
+                    isJumping = false;
+                });
+            };
+
+            const ensureInfiniteScroll = () => {
+                if (currentIndex >= allCards.length - appendCount) {
+                    currentIndex = currentIndex - totalCards;
+                    jumpToIndex(currentIndex);
+                } else if (currentIndex < prependCount) {
+                    currentIndex = currentIndex + totalCards;
+                    jumpToIndex(currentIndex);
+                }
+            };
+
+            const handlePrev = () => moveToIndex(currentIndex - 1);
+            const handleNext = () => moveToIndex(currentIndex + 1);
+
+            certificatePrev?.addEventListener('click', handlePrev);
+            certificateNext?.addEventListener('click', handleNext);
+
+            certificateCarousel.addEventListener('mouseenter', stopAutoPlay);
+            certificateCarousel.addEventListener('mouseleave', startAutoPlay);
+            certificateCarousel.addEventListener('touchstart', stopAutoPlay, { passive: true });
+            certificateCarousel.addEventListener('touchend', startAutoPlay, { passive: true });
+            certificateCarousel.addEventListener('focusin', stopAutoPlay);
+            certificateCarousel.addEventListener('focusout', startAutoPlay);
+
+            certificateTrack.addEventListener('scroll', () => {
+                if (isJumping) {
+                    return;
+                }
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    const trackRect = certificateTrack.getBoundingClientRect();
+                    const trackCenter = trackRect.left + trackRect.width / 2;
+                    let closestCard = null;
+                    let smallestDistance = Number.POSITIVE_INFINITY;
+                    let closestIndex = currentIndex;
+
+                    allCards.forEach((card, idx) => {
+                        const rect = card.getBoundingClientRect();
+                        if (rect.width === 0 || rect.height === 0) {
+                            return;
+                        }
+                        const cardCenter = rect.left + rect.width / 2;
+                        const distance = Math.abs(trackCenter - cardCenter);
+                        if (distance < smallestDistance) {
+                            smallestDistance = distance;
+                            closestCard = card;
+                            closestIndex = idx;
+                        }
+                    });
+
+                    if (closestCard) {
+                        currentIndex = closestIndex;
+                        const originalIndex = Number(closestCard.dataset.originalIndex || 0);
+                        certificateIndex = ((originalIndex % totalCards) + totalCards) % totalCards;
+                        setActiveCard(certificateIndex);
+                        updateDots();
+                    }
+
+                    ensureInfiniteScroll();
+                }, 120);
+            });
+
+            window.addEventListener('resize', () => {
+                scrollToIndex(currentIndex, 'auto');
+            });
+
+            if (certificateDotsContainer) {
+                certificateDotsContainer.innerHTML = '';
+                for (let index = 0; index < totalCards; index++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'certificate-dot';
+                    dot.dataset.index = String(index);
+                    dot.addEventListener('click', () => moveToIndex(prependCount + index));
+                    certificateDotsContainer.appendChild(dot);
+                    dots.push(dot);
+                }
+            }
+
+            scrollToIndex(currentIndex, 'auto');
+            const initialOriginalIndex = Number(allCards[currentIndex].dataset.originalIndex || 0);
+            certificateIndex = initialOriginalIndex;
+            setActiveCard(certificateIndex);
+            updateDots();
+            startAutoPlay();
+
+            stopCertificatesAutoPlay = stopAutoPlay;
+            startCertificatesAutoPlay = startAutoPlay;
+        }
+
+        const openCertificateModal = (card) => {
+            if (!certificateModal || !certificateModalImage || !certificateModalTitle || !certificateModalIssuer) {
+                return;
+            }
+
+            const image = card.querySelector('img');
+            const caption = card.querySelector('figcaption');
+            const issuerElement = caption?.querySelector('span');
+            const issuerText = issuerElement ? issuerElement.textContent.trim() : '';
+            let titleText = '';
+
+            if (caption) {
+                const combined = caption.textContent.trim();
+                titleText = issuerText ? combined.replace(issuerText, '').trim() : combined;
+            }
+
+            if (image) {
+                const modalSource = image.dataset.modalSrc || image.src;
+                const fallbackSource = image.dataset.modalFallback || image.dataset.modalDownload || image.src;
+                const downloadSource = image.dataset.modalDownload || fallbackSource;
+
+                certificateModalImage.onerror = null;
+                certificateModalImage.setAttribute('referrerpolicy', 'no-referrer');
+                certificateModalImage.src = modalSource;
+                certificateModalImage.alt = image.alt || titleText;
+
+                certificateModalImage.onerror = () => {
+                    certificateModalImage.onerror = null;
+                    if (fallbackSource && fallbackSource !== modalSource) {
+                        certificateModalImage.src = fallbackSource;
+                    } else if (downloadSource && downloadSource !== modalSource) {
+                        certificateModalImage.src = downloadSource;
+                    }
+                };
+            }
+
+            certificateModalTitle.textContent = titleText;
+            certificateModalIssuer.textContent = issuerText;
+            certificateModalIssuer.style.display = issuerText ? 'block' : 'none';
+
+            certificateModal.classList.add('open');
+            certificateModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+            stopCertificatesAutoPlay?.();
+            lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            certificateModalClose?.focus();
+        };
+
+        const closeCertificateModal = () => {
+            if (!certificateModal?.classList.contains('open')) {
+                return;
+            }
+
+            certificateModal.classList.remove('open');
+            certificateModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            certificateModalImage.src = '';
+            certificateModalImage.alt = '';
+            certificateModalImage.removeAttribute('referrerpolicy');
+            certificateModalImage.onerror = null;
+            certificateModalTitle.textContent = '';
+            certificateModalIssuer.textContent = '';
+            certificateModalIssuer.style.display = '';
+            startCertificatesAutoPlay?.();
+
+            if (lastFocusedElement instanceof HTMLElement) {
+                lastFocusedElement.focus();
+                lastFocusedElement = null;
+            }
+        };
+
+        certificateModalClose?.addEventListener('click', closeCertificateModal);
+
+        certificateModal?.addEventListener('click', (event) => {
+            if (event.target === certificateModal) {
+                closeCertificateModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeCertificateModal();
+            }
+        });
+
+        const registerCertificateInteractions = (cards) => {
+            cards.forEach(card => {
+                const image = card.querySelector('img');
+                if (image && !image.dataset.modalListenerAttached) {
+                    image.addEventListener('click', () => openCertificateModal(card));
+                    image.dataset.modalListenerAttached = 'true';
+                }
+
+                if (!card.dataset.keypressListenerAttached) {
+                    card.addEventListener('keydown', (event) => {
+                        if ((event.key === 'Enter' || event.key === ' ') && document.activeElement === card) {
+                            event.preventDefault();
+                            openCertificateModal(card);
+                        }
+                    });
+                    card.dataset.keypressListenerAttached = 'true';
+                }
+            });
+        };
+
+        registerCertificateInteractions(allCertificateCardElements.length ? allCertificateCardElements : certificateCards);
         
         // CV Download from Google Drive
         // CV Download from Google Drive
 cvBtn.addEventListener('click', () => {
     // Replace YOUR_FILE_ID with your actual Google Drive file ID
     //file ID - https://drive.google.com/file/d/1IwT64Gf9hRuoaXBcnxcuePVrYPNlsZUs/view?usp=sharing
-    const googleDriveFileId = '1IwT64Gf9hRuoaXBcnxcuePVrYPNlsZUs'; // Replace with your Google Drive file ID
+    const googleDriveFileId = '1e5JBMR3gFGCmbumSb3iYcdfyJ7HRSLsd'; // Replace with your Google Drive file ID
     const downloadUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
     
     // Show loading state
