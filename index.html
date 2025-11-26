@@ -35,6 +35,11 @@
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             --transition-speed: 0.3s;
             --contact-bg: #2c3e50; /* Fixed contact background color */
+            --metrics-text-primary: var(--primary-color);
+            --metrics-text-secondary: var(--primary-color);
+            --section-bg-default: #ffffff;
+            --section-bg-alt: linear-gradient(180deg, #f9fbff 0%, #eef3ff 100%);
+            --section-bg-muted: linear-gradient(180deg, #fdfefe 0%, #f4f6fb 100%);
         }
         
         /* Dark Theme Variables */
@@ -53,6 +58,11 @@
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             --contact-bg: #1a1a1a; /* Fixed contact background color for dark mode */
             --small-text-color: #fff;
+            --metrics-text-primary: #ffffff;
+            --metrics-text-secondary: rgba(255, 255, 255, 0.85);
+            --section-bg-default: linear-gradient(180deg, #161b24 0%, #1e2430 100%);
+            --section-bg-alt: linear-gradient(180deg, #141923 0%, #1a202d 100%);
+            --section-bg-muted: linear-gradient(180deg, #10141c 0%, #171c27 100%);
 [data-theme="dark"] .project-tag,
 [data-theme="dark"] .project-info p {
     color: #fff !important;
@@ -80,7 +90,7 @@
             color: var(--text-color);
             background-color: var(--bg-color);
             overflow-x: hidden;
-            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
         }
         
         html {
@@ -481,8 +491,8 @@
         
         /* About Section */
         .about {
-            background-color: var(--card-bg);
-            transition: background-color var(--transition-speed) ease;
+            background: var(--section-bg-alt);
+            transition: background var(--transition-speed) ease;
         }
         
         .about-content {
@@ -655,8 +665,8 @@
         
         /* Skills Section */
         .skills {
-            background-color: var(--bg-color);
-            transition: background-color var(--transition-speed) ease;
+            background: var(--section-bg-muted);
+            transition: background var(--transition-speed) ease;
         }
         
         .skills-container {
@@ -782,8 +792,8 @@
         
         /* Technologies Section */
         .technologies {
-            background-color: var(--card-bg);
-            transition: background-color var(--transition-speed) ease;
+            background: var(--section-bg-default);
+            transition: background var(--transition-speed) ease;
         }
         
         .technologies-container {
@@ -877,10 +887,161 @@
             color: var(--text-color);
         }
         
+        /* Metrics Section */
+        .metrics {
+            --metric-highlight: var(--metrics-text-primary);
+            --metric-gradient-start: rgba(52, 152, 219, 0.2);
+            --metric-gradient-end: rgba(52, 152, 219, 0.05);
+            background: var(--section-bg-default);
+            color: var(--metrics-text-secondary);
+            position: relative;
+            overflow: hidden;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        .metrics:before {
+            content: '';
+            position: absolute;
+            inset: -120px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 75%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .metrics .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .metrics h2 {
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .metrics h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] .metrics h2 {
+            color: var(--primary-color);
+        }
+
+        .metrics-header {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 40px;
+        }
+
+        .metrics-header p {
+            color: var(--primary-color);
+            margin: 0;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .metric-card {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(160deg, var(--metric-gradient-start, rgba(52, 152, 219, 0.12)), var(--metric-gradient-end, rgba(52, 152, 219, 0.02)));
+            background-repeat: no-repeat;
+            border-radius: 18px;
+            padding: 32px 28px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease, background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .metric-card:before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .metric-card:hover {
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+        }
+
+        .metric-card:hover:before {
+            opacity: 1;
+        }
+
+        .metric-value {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 14px;
+            color: var(--metric-highlight);
+        }
+
+        .metric-divider {
+            width: 60px;
+            height: 3px;
+            margin: 0 auto 16px;
+            background-color: var(--metric-highlight);
+            border-radius: 999px;
+        }
+
+        .metric-card p {
+            color: var(--metrics-text-secondary);
+            opacity: 0.85;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        [data-theme="dark"] .metrics {
+            --metric-highlight: var(--metrics-text-primary);
+            --metric-gradient-start: rgba(255, 255, 255, 0.18);
+            --metric-gradient-end: rgba(255, 255, 255, 0.06);
+        }
+
+        [data-theme="dark"] .metrics:before {
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 75%);
+        }
+
+        [data-theme="dark"] .metric-card:before {
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 576px) {
+            .metrics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 16px;
+            }
+
+            .metric-card {
+                padding: 28px 20px;
+            }
+
+            .metric-value {
+                font-size: 2.2rem;
+            }
+        }
+
         /* Projects Section */
         .projects {
-            background-color: var(--card-bg);
-            transition: background-color var(--transition-speed) ease;
+            background: var(--section-bg-alt);
+            transition: background var(--transition-speed) ease;
         }
         
         .projects-grid {
@@ -1027,8 +1188,8 @@
         
         /* Certificates Section */
         .certificates {
-            background-color: var(--bg-color);
-            transition: background-color var(--transition-speed) ease;
+            background: var(--section-bg-muted);
+            transition: background var(--transition-speed) ease;
         }
         
         .certificates .section-intro {
@@ -1824,6 +1985,10 @@
                             
                         </div>
                         <div class="experience-item">
+                            <h4> HP Life Certification (in progress)</h4>
+                            
+                        </div>
+                        <div class="experience-item">
                             <h4> Udemy : UNIX Basics</h4>
                             
                         </div>
@@ -2005,6 +2170,38 @@
                
               </div>
         </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section id="metrics" class="metrics">
+        <div class="container">
+            <div class="metrics-header">
+                <h2>By the Numbers</h2>
+                <p>Measurable impact through passionate dedication and continuous growth.</p>
+            </div>
+            <div class="metrics-grid">
+                <article class="metric-card">
+                    <div class="metric-value" data-target="10" data-suffix="+" data-duration="1800">0</div>
+                    <div class="metric-divider"></div>
+                    <p>Projects Completed</p>
+                </article>
+                <article class="metric-card">
+                    <div class="metric-value" data-target="4" data-duration="1600">0</div>
+                    <div class="metric-divider"></div>
+                    <p>Years of Coding Experience</p>
+                </article>
+                <article class="metric-card">
+                    <div class="metric-value" data-target="1000" data-suffix="+" data-duration="1000">0</div>
+                    <div class="metric-divider"></div>
+                    <p>Hours Dedicated to Practice</p>
+                </article>
+                <article class="metric-card">
+                    <div class="metric-value" data-target="25000" data-format="compact" data-suffix="+" data-duration="2100">0</div>
+                    <div class="metric-divider"></div>
+                    <p>Lines of Code Crafted</p>
+                </article>
             </div>
         </div>
     </section>
@@ -2457,6 +2654,10 @@
         const certificateModalTitle = document.getElementById('certificateModalTitle');
         const certificateModalIssuer = document.getElementById('certificateModalIssuer');
         const certificateModalClose = certificateModal?.querySelector('.modal-close');
+        const metricsSection = document.getElementById('metrics');
+        const metricCards = metricsSection ? metricsSection.querySelectorAll('.metric-card') : [];
+        const metricValues = metricsSection ? metricsSection.querySelectorAll('.metric-value') : [];
+        let metricsAnimated = false;
         let allCertificateCardElements = certificateCards.slice();
 
         certificateCards.forEach(card => {
@@ -2572,6 +2773,50 @@
         }
         
         createParticles();
+
+        const formatMetricValue = (value, format) => {
+            if (format === 'compact') {
+                return Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(value);
+            }
+            return value.toLocaleString();
+        };
+
+        const animateMetricValue = (element) => {
+            const target = Number(element.dataset.target || '0');
+            const suffix = element.dataset.suffix || '';
+            const prefix = element.dataset.prefix || '';
+            const duration = Number(element.dataset.duration || '2000');
+            const format = element.dataset.format || 'standard';
+            const startTime = performance.now();
+
+            const step = (now) => {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentValue = Math.round(progress * target);
+                element.textContent = `${prefix}${formatMetricValue(currentValue, format)}${suffix}`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    element.textContent = `${prefix}${formatMetricValue(target, format)}${suffix}`;
+                }
+            };
+
+            requestAnimationFrame(step);
+        };
+
+        const maybeAnimateMetrics = () => {
+            if (!metricsSection || metricsAnimated) {
+                return;
+            }
+
+            const rect = metricsSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                metricCards.forEach(card => card.classList.add('visible'));
+                metricValues.forEach(animateMetricValue);
+                metricsAnimated = true;
+            }
+        };
         
         // Check for saved theme preference or default to light mode
         const currentTheme = localStorage.getItem('theme') || 'light';
@@ -2671,6 +2916,8 @@
                 }
             });
             
+            maybeAnimateMetrics();
+
             // Animate project cards
             const projectCards = document.querySelectorAll('.project-card');
             projectCards.forEach(card => {
