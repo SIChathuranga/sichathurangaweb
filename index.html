@@ -1777,6 +1777,22 @@
             nav.active {
                 max-height: 300px;
             }
+
+            /* Ensure header can wrap controls and the mobile nav sits above other content */
+            .header-container {
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 10px;
+            }
+
+            nav {
+                z-index: 1100;
+            }
+
+            /* Provide more room for mobile nav so longer lists are visible */
+            nav.active {
+                max-height: 1000px;
+            }
             
             nav ul {
                 flex-direction: column;
