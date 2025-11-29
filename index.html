@@ -2183,22 +2183,22 @@
             </div>
             <div class="metrics-grid">
                 <article class="metric-card">
-                    <div class="metric-value" data-target="10" data-suffix="+" data-duration="1800">0</div>
+                    <div class="metric-value" data-target="10" data-suffix="+" data-duration="3500">0</div>
                     <div class="metric-divider"></div>
                     <p>Projects Completed</p>
                 </article>
                 <article class="metric-card">
-                    <div class="metric-value" data-target="4" data-duration="1600">0</div>
+                    <div class="metric-value" data-target="4" data-duration="3500">0</div>
                     <div class="metric-divider"></div>
                     <p>Years of Coding Experience</p>
                 </article>
                 <article class="metric-card">
-                    <div class="metric-value" data-target="1000" data-suffix="+" data-duration="1000">0</div>
+                    <div class="metric-value" data-target="1000" data-suffix="+" data-duration="3500">0</div>
                     <div class="metric-divider"></div>
                     <p>Hours Dedicated to Practice</p>
                 </article>
                 <article class="metric-card">
-                    <div class="metric-value" data-target="25000" data-format="compact" data-suffix="+" data-duration="2100">0</div>
+                    <div class="metric-value" data-target="25000" data-format="compact" data-suffix="+" data-duration="3800">0</div>
                     <div class="metric-divider"></div>
                     <p>Lines of Code Crafted</p>
                 </article>
@@ -2785,14 +2785,16 @@
             const target = Number(element.dataset.target || '0');
             const suffix = element.dataset.suffix || '';
             const prefix = element.dataset.prefix || '';
-            const duration = Number(element.dataset.duration || '2000');
+            const duration = Number(element.dataset.duration || '3200');
             const format = element.dataset.format || 'standard';
+            const startValue = Number(element.dataset.start || '0');
             const startTime = performance.now();
 
             const step = (now) => {
                 const elapsed = now - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                const currentValue = Math.round(progress * target);
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                const currentValue = Math.round(startValue + (target - startValue) * easedProgress);
                 element.textContent = `${prefix}${formatMetricValue(currentValue, format)}${suffix}`;
 
                 if (progress < 1) {
@@ -2805,18 +2807,46 @@
             requestAnimationFrame(step);
         };
 
+        const runMetricAnimations = () => {
+            if (metricsAnimated) {
+                return;
+            }
+
+            metricCards.forEach(card => card.classList.add('visible'));
+            metricValues.forEach(valueEl => {
+                if (!valueEl.dataset.animated) {
+                    animateMetricValue(valueEl);
+                    valueEl.dataset.animated = 'true';
+                }
+            });
+            metricsAnimated = true;
+        };
+
         const maybeAnimateMetrics = () => {
             if (!metricsSection || metricsAnimated) {
                 return;
             }
 
             const rect = metricsSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                metricCards.forEach(card => card.classList.add('visible'));
-                metricValues.forEach(animateMetricValue);
-                metricsAnimated = true;
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+            if (rect.top < viewportHeight * 0.8 && rect.bottom > viewportHeight * 0.2) {
+                runMetricAnimations();
             }
         };
+
+        if (metricsSection && 'IntersectionObserver' in window) {
+            const metricsObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        runMetricAnimations();
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            metricsObserver.observe(metricsSection);
+        }
         
         // Check for saved theme preference or default to light mode
         const currentTheme = localStorage.getItem('theme') || 'light';
