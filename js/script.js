@@ -293,7 +293,8 @@
         // --- Scene Setup ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = 28; // Moved back further to accommodate larger text block
+        const isMobile = window.innerWidth < 768;
+        camera.position.z = isMobile ? 50 : 28; // Move back on mobile to fit text
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -480,6 +481,8 @@
             if (!container) return;
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
+            // Adjust Z on resize
+            camera.position.z = window.innerWidth < 768 ? 50 : 28;
             renderer.setSize(container.clientWidth, container.clientHeight);
         });
 

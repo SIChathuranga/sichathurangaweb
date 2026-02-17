@@ -2163,6 +2163,11 @@ body.modal-open {
     --nav-height: 64px;
   }
 
+  /* Hide floating badges on mobile to prevent horizontal overflow and clutter */
+  .hero-tech-badges {
+    display: none;
+  }
+
   .menu-toggle {
     display: flex;
   }
@@ -2215,14 +2220,30 @@ body.modal-open {
 
   .hero-text {
     align-items: center;
+    width: 100%;
+  }
+
+  .hero-role {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+
+  /* Ensure typewriter cursor doesn't cause layout shift or misalignment */
+  .hero-role::after {
+    display: inline-block;
   }
 
   .hero-title {
     font-size: clamp(2.2rem, 8vw, 3.5rem);
+    width: 100%;
   }
 
   .hero-name {
     font-size: clamp(2.5rem, 10vw, 4.5rem);
+    width: 100%;
   }
 
   .hero-subtitle {
@@ -2236,7 +2257,7 @@ body.modal-open {
     gap: 15px;
     width: 100%;
     max-width: 320px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
   }
 
   .hero-actions .btn {
@@ -2252,6 +2273,12 @@ body.modal-open {
 
   .hero-visual {
     order: -1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Ensure no overflow from children */
+    overflow: hidden;
+    padding: 20px 0;
   }
 
   .hero-photo-wrapper {
@@ -2267,6 +2294,7 @@ body.modal-open {
     justify-content: center;
     margin-top: 30px;
     gap: 20px;
+    width: 100%;
   }
 
   .about-grid {
@@ -2274,14 +2302,42 @@ body.modal-open {
     gap: 40px;
   }
 
+  .about-text {
+    text-align: center;
+  }
+
+  .about-text p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-tabs {
+    margin: 0 auto 24px;
+    justify-content: center;
+  }
+
   .about-anim-wrapper {
     max-width: 400px;
     margin: 0 auto;
+    /* Ensure visibility if JS fails */
+    min-height: 300px;
   }
 
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .contact-item {
+    justify-content: center;
+  }
+
+  .contact-item div:last-child {
+    text-align: left;
+  }
+
+  .social-links {
+    justify-content: center;
   }
 
   .projects-grid {
