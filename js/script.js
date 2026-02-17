@@ -266,6 +266,8 @@
         if (container) container.innerHTML = '';
         if (!container || !window.THREE) return;
 
+        const isMobile = window.innerWidth < 768;
+
         // --- Configuration ---
         const config = {
             textSequence: [
@@ -280,12 +282,12 @@
                 "Make it work,\nmake it right,\nmake it fast.\n- Kent Beck",
                 "Fix the cause,\nnot the symptom.\n- Steve Maguire"
             ],
-            fontSize: 45,             // Increased size significantly
+            fontSize: isMobile ? 40 : 45,             // Adjusted for mobile
             fontFamily: 'Verdana, sans-serif',
-            particleSize: 0.035,      // Smaller particles for finer detail
-            particleColorLight: 0x0f172a, // Slate-900 (Dark) for Light Mode background
-            particleColorDark: 0x6366f1,  // Indigo-500 (Bright) for Dark Mode background
-            morphSpeed: 0.015,        // Much slower for smooth, elegant transition
+            particleSize: isMobile ? 0.055 : 0.035,   // Larger particles on mobile for visibility
+            particleColorLight: 0x0f172a,
+            particleColorDark: 0x6366f1,
+            morphSpeed: 0.015,
             interactionRadius: 2.5,
             interactionForce: 0.8
         };
@@ -293,8 +295,7 @@
         // --- Scene Setup ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const isMobile = window.innerWidth < 768;
-        camera.position.z = isMobile ? 50 : 28; // Move back on mobile to fit text
+        camera.position.z = isMobile ? 45 : 28; // Optimized z-distance for mobile
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -494,7 +495,23 @@
             mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
         });
 
+        const handleTouch = (e) => {
+            if (e.pointerType === 'mouse') return; // Handled by mousemove
+            e.preventDefault();
+            const rect = container.getBoundingClientRect();
+            const touch = e.touches[0];
+            mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+        };
+
+        container.addEventListener('touchstart', handleTouch, { passive: false });
+        container.addEventListener('touchmove', handleTouch, { passive: false });
+
         container.addEventListener('mouseleave', () => {
+            mouse.x = -999;
+            mouse.y = -999;
+        });
+        container.addEventListener('touchend', () => {
             mouse.x = -999;
             mouse.y = -999;
         });

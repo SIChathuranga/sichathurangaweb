@@ -2275,7 +2275,10 @@ body.modal-open {
     order: -1;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    /* Explicitly center children horizontally */
     /* Ensure no overflow from children */
     overflow: hidden;
     padding: 20px 0;
