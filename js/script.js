@@ -282,9 +282,9 @@
                 "Make it work,\nmake it right,\nmake it fast.\n- Kent Beck",
                 "Fix the cause,\nnot the symptom.\n- Steve Maguire"
             ],
-            fontSize: isMobile ? 40 : 45,             // Adjusted for mobile
+            fontSize: isMobile ? 35 : 45,             // Smaller font for mobile
             fontFamily: 'Verdana, sans-serif',
-            particleSize: isMobile ? 0.055 : 0.035,   // Larger particles on mobile for visibility
+            particleSize: isMobile ? 0.1 : 0.035,     // Much larger particles for mobile visibility
             particleColorLight: 0x0f172a,
             particleColorDark: 0x6366f1,
             morphSpeed: 0.015,
@@ -295,7 +295,7 @@
         // --- Scene Setup ---
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = isMobile ? 45 : 28; // Optimized z-distance for mobile
+        camera.position.z = isMobile ? 40 : 28; // Closer camera for smaller mobile font
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -307,7 +307,7 @@
         let currentPositions;
         let targetPositions;
         let particleCount = 0;
-        const maxParticles = 35000; // Large buffer for maximum density
+        const maxParticles = 60000; // Increased buffer to prevent clipping
         let currentIndex = 0;
         let animationId;
 
